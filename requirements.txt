@@ -7,3 +7,4 @@ pillow
 seaborn
 opencv-python
 grad-cam
+gdown
