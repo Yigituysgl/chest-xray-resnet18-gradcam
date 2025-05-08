@@ -35,16 +35,31 @@ print("CUDA available:", torch.cuda.is_available())
 # In[4]:
 
 
+#import zipfile
+
+#zip_path = '/content/drive/MyDrive/XrayClassificationproject/archive(25).zip'
+
+#extract_path = '/content/data'
+
+#with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+   # zip_ref.extractall(extract_path)
+
+#print("✅ Extraction complete!")
+
+import gdown
 import zipfile
+import os
 
-zip_path = '/content/drive/MyDrive/XrayClassificationproject/archive(25).zip'
+if not os.path.exists("data"):
+    file_id = "1U8Uxre5jmGESkuvO_WjagRSKp4lbN8to"  
+    url = f"https://drive.google.com/uc?id={file_id}"
+    gdown.download(url, "data.zip", quiet=False)
 
-extract_path = '/content/data'
+    with zipfile.ZipFile("data.zip", 'r') as zip_ref:
+        zip_ref.extractall("data")
 
-with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-    zip_ref.extractall(extract_path)
+    print("✅ Dataset extracted to ./data/")
 
-print("✅ Extraction complete!")
 
 
 
@@ -143,9 +158,9 @@ transform = transforms.Compose([
 
 from torchvision.datasets import ImageFolder
 
-train_path = "/content/data/train"
-val_path = "/content/data/val"
-test_path = "/content/data/test"
+train_path = "data/train"
+val_path = "data/val"
+test_path = "data/test"
 
 train_dataset = ImageFolder(root=train_path, transform=transform)
 val_dataset = ImageFolder(root=val_path, transform=transform)
