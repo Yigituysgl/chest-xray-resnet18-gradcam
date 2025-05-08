@@ -8,3 +8,4 @@ seaborn
 opencv-python
 grad-cam
 gdown
+opencv-python
